@@ -9,7 +9,7 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
 
   /* ---------------- CONTENIDO ---------------- */
   const HT_MUPIS = ['v3-mupi-hoy-toca-holandesp1','v2-1-mupi-hoy-toca-comerciop2','v3-1-mupi-hoy-toca-pagop3','v3-mupi-hoy-toca-carnecallep1','v2-2-mupi-hoy-toca-comerciop2','v3-2-mupi-hoy-toca-pagop3','v3-mupi-hoy-toca-kaerup1','v2-3-mupi-hoy-toca-comerciop2','v3-4-mupi-hoy-toca-pagop3','v3-mupi-hoy-toca-nomadp1','v2-4-mupi-hoy-toca-comerciop2','v3-mupi-hoy-toca-pecadop1','v2-5-mupi-hoy-toca-comerciop2','v3-mupis-hoy-toca-maurita','v2-6-mupi-hoy-toca-comerciop2'].map(n => 'ht-' + n);
-  const INDEX = { 'heartworkers': 'Heart-workers', 'favorito-del-partido': 'El favorito del partido', 'md': 'La verdadera pasarela', 'asi-sabe-el-verano': 'Así sabe el verano', 'works-for-me': 'Works for me' };
+  const INDEX = { 'heartworkers': 'Heart-workers', 'favorito-del-partido': 'El favorito del partido', 'md': 'La verdadera pasarela', 'asi-sabe-el-verano': 'Así sabe el verano', 'works-for-me': 'Works for me', 'el-amor-se-cocina': 'El amor se cocina' };
   const ROLE = ['Rol', 'Dirección de arte'], AG = ['Agencia', 'Ogilvy El Salvador'];
 
   const CASES = window.__CASES = [
@@ -222,6 +222,24 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
       ]
     },
     {
+      id: 'el-amor-se-cocina', brand: 'Lactolac', name: 'Lactolac', line: 'El amor se cocina.',
+      tags: 'Campaña navideña · Vallas · Video · Digital',
+      cover: { img: I('ln-valla-03') },
+      intro: [
+        'Campaña de Navidad para Lactolac. En diciembre las recetas de siempre vuelven a la mesa, y cada plato se prepara pensando en alguien.',
+        'Construimos el concepto El amor se cocina con fotografía cálida de cocina, una paleta naranja y gráficos navideños dibujados a mano. Lo llevamos a vallas, video y piezas digitales.'
+      ],
+      meta: [['Cliente', 'Lactolac'], ROLE, AG],
+      hero: { t: 'img', src: 'ln-valla-03' },
+      blocks: [
+        { t: 'vduo', items: ['ln-lasagna', 'ln-cheesecake'], ratio: '9/16', sound: true },
+        { t: 'img', src: 'ln-valla-02' },
+        { t: 'duo', items: ['ln-triple-02', 'ln-triple-03'], natural: true },
+        { t: 'duo', items: ['ln-crema', 'ln-queso-crema'], natural: true },
+        { t: 'stage', bg: '#e8dfcf', src: 'ln-mozzarella', tall: true }
+      ]
+    },
+    {
       id: 'works-for-me', brand: 'Teleperformance', name: 'Teleperformance', line: 'Works for me.',
       tags: 'Animación 3D · Social',
       cover: { video: V('tp-pantallas-a'), img: I('tpc-stb-its-tp-03') },
@@ -267,7 +285,7 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
     return el;
   };
   const img = (src, cls = '', alt = '', eager = false) => h('img', { src, class: cls, alt, loading: 'eager', decoding: 'async', draggable: 'false' });
-  const vid = (src, poster, eager) => { const v = h('video', { muted: true, loop: true, playsinline: true, preload: eager ? 'auto' : 'none', poster, 'data-src': src }); v.muted = true; return v; };
+  const vid = (src, poster, eager) => { const v = h('video', { muted: true, autoplay: true, loop: true, playsinline: true, 'webkit-playsinline': true, preload: eager ? 'auto' : 'metadata', poster, 'data-src': src }); v.muted = true; v.defaultMuted = true; v.addEventListener('canplay', () => { if (v._want) v.play().catch(() => {}); }); v.addEventListener('stalled', () => { if (v._want && v.readyState < 2) { const t = v.currentTime; v.load(); v.currentTime = t; } }); return v; };
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
   const ease = t => 1 - Math.pow(1 - t, 3);
@@ -531,8 +549,8 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
         return h('div', { class: 'breathe' }, wrap);
       }
       case 'vduo': {
-        const figs = b.items.map(n => h('figure', { style: b.ratio ? { aspectRatio: b.ratio } : null }, vid(V(n))));
-        return h('div', { class: 'breathe' }, h('div', { class: 'blk duo vduo' }, figs));
+        const figs = b.items.map(n => { const v = vid(V(n), b.sound ? I(n) : null); const f = h('figure', { style: b.ratio ? { aspectRatio: b.ratio, position: 'relative' } : null }, v); if (b.sound) f.append(soundBtn(v)); return f; });
+        return h('div', { class: 'breathe' }, h('div', { class: 'blk duo vduo' + (b.ratio === '9/16' ? ' tallv' : '') }, figs));
       }
       case 'reels': {
         const figs = b.items.map(n => h('figure', {}, vid(V(n), n.startsWith('ht-') ? I(n.toLowerCase().replace(/_/g, '-')) : null)));
@@ -727,7 +745,7 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
         h('dl', { class: 'cv' },
           cvRow('Experiencia', [['Senior Creative Visual', 'Ogilvy El Salvador', '2023 — hoy'], ['Asistente Creativo', 'Ogilvy El Salvador', '2021 — 2023'], ['Diseñador Digital', 'Riot El Salvador', '2021']]),
           cvRow('Educación', [['Diseño Industrial y de Productos', 'Universidad Don Bosco', '2017 — 2022']]),
-          h('div', { class: 'cv-row' }, h('dt', {}, 'Marcas'), h('dd', {}, h('p', { class: 'brands' }, 'BAC, Teleperformance, BMW, Lactolac, SISA, Chevrolet, Pilsener, Golden, MD, Urbánica, KIA, McCormick, APAC.'))),
+          h('div', { class: 'cv-row' }, h('dt', {}, 'Marcas'), h('dd', {}, h('p', { class: 'brands' }, 'BAC, Teleperformance, BMW, Lactolac, Popeyes, YES, Diana, SISA, Chevrolet, Pilsener, Golden, MD, Urbánica, KIA, McCormick, APAC.'))),
           h('div', { class: 'cv-row' }, h('dt', {}, 'Herramientas'), h('dd', {}, h('p', { class: 'brands' }, 'Illustrator, Photoshop, After Effects, Midjourney, Whisk y fotografía. Uso herramientas de IA para generación visual dentro del proceso creativo.')))
         )));
     app.replaceChildren(hero, work, about);
@@ -751,7 +769,8 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
     const nframe = h('span', { class: 'next-media' }, nmedia);
     const nx = h('a', { class: 'next wrap', href: '#' + next.id },
       h('span', { class: 'label' }, 'Siguiente proyecto'),
-      h('span', { class: 'next-name' }, next.name, h('span', { class: 'next-line' }, ' ', next.line)), nframe);
+      h('span', { class: 'next-name' }, next.name, h('span', { class: 'next-line' }, ' ', next.line)),
+      h('span', { class: 'next-right' }, nframe, h('span', { class: 'next-arrow', 'aria-hidden': 'true' })));
     reveal(nframe, nmedia, { inset: 5 });
     app.replaceChildren(head, hero, text, body, nx);
   }
@@ -762,9 +781,9 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
     io && io.disconnect();
     io = new IntersectionObserver(es => es.forEach(e => {
       const t = e.target;
-      if (t.tagName === 'VIDEO') { if (e.isIntersecting) { if (!t.src) t.src = t.dataset.src; t.play().catch(() => {}); } else t.pause(); }
+      if (t.tagName === 'VIDEO') { t._want = e.isIntersecting; if (e.isIntersecting) { if (!t.src) t.src = t.dataset.src; t.play().catch(() => {}); } else t.pause(); }
       else t._visible = e.isIntersecting;
-    }), { rootMargin: '150px 0px', threshold: 0.01 });
+    }), { rootMargin: '400px 0px', threshold: 0.01 });
     app.querySelectorAll('video').forEach(v => { if (!v.closest('.row')) io.observe(v); });
     
   }
