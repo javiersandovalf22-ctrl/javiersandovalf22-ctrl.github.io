@@ -379,6 +379,13 @@ a.copy.act{text-decoration:none;display:inline-block}
 .next-arrow::before{background:linear-gradient(90deg,var(--fg),var(--fg));transition:background .8s}
 .next:hover .next-arrow::before{background:linear-gradient(90deg,#f4f7ff,#8db4ff)}
 .next:hover .next-arrow::after{border-color:#8db4ff;transition:border-color .8s}
+
+@media (max-width:820px){
+  .field,.field.n2,.field.n4,.field.n5{aspect-ratio:auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:10% 7%;align-items:start}
+  .field .piece,.field.n2 .piece,.field.n4 .piece,.field.n5 .piece{height:auto;width:100%;transform:none!important}
+  .field .piece img{width:100%;height:auto;max-height:none}
+  .field.n3 .piece:last-child,.field.n5 .piece:last-child{grid-column:1/-1;width:50%;justify-self:center}
+}
 </style>
 </head>
 <body>
@@ -401,7 +408,7 @@ a.copy.act{text-decoration:none;display:inline-block}
   </div>
   <div class="small"><span>Javier Sandoval</span><span>San Salvador, El Salvador</span></div>
 </footer>
-<script src="app.v16.js" charset="utf-8"></script>
+<script src="app.v17.js" charset="utf-8"></script>
 
 </body>
 </html>

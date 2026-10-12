@@ -181,7 +181,7 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
       hero: { t: 'img', src: 'lm-card-jon-kv-mundial-lactolac-concepto' },
       blocks: [
         { t: 'img', src: 'lm-mockupvalla-lactolac15x6' },
-        { t: 'field', bg: '#ff6400', items: ['lm-v4card-jon-kv-mundial-lactolac', 'lm-v3-card-jon-kv-mundial-lactolac', 'lm-v5card-jon-kv-mundial-lactolac'] },
+        { t: 'field', bg: '#ff6400', items: ['lm-v4card-jon-kv-mundial-lactolac', 'lm-v3-card-b', 'lm-v5card-jon-kv-mundial-lactolac'] },
         { t: 'scene', key: 'lm-dos' },
         { t: 'stage', bg: '#2e7d3b', src: 'lm-popd-png', tall: true }
       ]
