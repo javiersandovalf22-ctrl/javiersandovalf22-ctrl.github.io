@@ -223,11 +223,11 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
     },
     {
       id: 'el-amor-se-cocina', brand: 'Lactolac', name: 'Lactolac', line: 'El amor se cocina.',
-      tags: 'Campaña navideña · Vallas · Video · Digital',
-      cover: { img: I('ln-valla-03') },
+      tags: 'Campaña 360 · OOH · Digital · Pantallas',
+      cover: { img: I('ln-queso-crema') },
       intro: [
         'Campaña de Navidad para Lactolac. En diciembre las recetas de siempre vuelven a la mesa, y cada plato se prepara pensando en alguien.',
-        'Construimos el concepto El amor se cocina con fotografía cálida de cocina, una paleta naranja y gráficos navideños dibujados a mano. Lo llevamos a vallas, video y piezas digitales.'
+        'Construimos el concepto El amor se cocina con fotografía cálida de cocina, una paleta naranja y gráficos navideños dibujados a mano. Una campaña 360 que llevamos a vallas, pantallas, video y digital.'
       ],
       meta: [['Cliente', 'Lactolac'], ROLE, AG],
       hero: { t: 'img', src: 'ln-valla-03' },
@@ -235,8 +235,7 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
         { t: 'vduo', items: ['ln-lasagna', 'ln-cheesecake'], ratio: '9/16', sound: true },
         { t: 'img', src: 'ln-valla-02' },
         { t: 'duo', items: ['ln-triple-02', 'ln-triple-03'], natural: true },
-        { t: 'duo', items: ['ln-crema', 'ln-queso-crema'], natural: true },
-        { t: 'stage', bg: '#e8dfcf', src: 'ln-mozzarella', tall: true }
+        { t: 'duo', items: ['ln-crema', 'ln-queso-crema'], natural: true }
       ]
     },
     {
