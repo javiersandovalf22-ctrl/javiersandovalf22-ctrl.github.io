@@ -744,7 +744,7 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
         h('dl', { class: 'cv' },
           cvRow('Experiencia', [['Senior Creative Visual', 'Ogilvy El Salvador', '2023 — hoy'], ['Asistente Creativo', 'Ogilvy El Salvador', '2021 — 2023'], ['Diseñador Digital', 'Riot El Salvador', '2021']]),
           cvRow('Educación', [['Diseño Industrial y de Productos', 'Universidad Don Bosco', '2017 — 2022']]),
-          h('div', { class: 'cv-row' }, h('dt', {}, 'Marcas'), h('dd', {}, h('p', { class: 'brands' }, 'BAC, Teleperformance, BMW, Lactolac, Popeyes, YES, Diana, SISA, Chevrolet, Pilsener, Golden, MD, Urbánica, KIA, McCormick, APAC.'))),
+          h('div', { class: 'cv-row' }, h('dt', {}, 'Marcas'), h('dd', {}, h('p', { class: 'brands' }, 'BAC, Teleperformance, BMW, Lactolac, Popeyes, Pedidos Ya, YES, Diana, SISA, Chevrolet, Pilsener, Golden, MD, Urbánica, KIA, McCormick, APAC.'))),
           h('div', { class: 'cv-row' }, h('dt', {}, 'Herramientas'), h('dd', {}, h('p', { class: 'brands' }, 'Illustrator, Photoshop, After Effects, Midjourney, Whisk y fotografía. Uso herramientas de IA para generación visual dentro del proceso creativo.')))
         )));
     app.replaceChildren(hero, work, about);
