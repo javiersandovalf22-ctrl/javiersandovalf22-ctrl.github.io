@@ -271,6 +271,59 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
     }
   ];
 
+  /* ---------------- ENGLISH ---------------- */
+  const EN = {
+    'hoy-toca': { tags: 'Brand platform · OOH · Video · Merch', intro: [
+      'Hoy Toca is a BAC platform to support local restaurants in El Salvador. It starts from a simple idea: there is always a good reason to eat out, and every visit helps a local business grow.',
+      'We created the campaign identity and a red-and-white check system that works just as well on a billboard as on a pin. We took it to billboards, street posters, screens, lightboxes for each restaurant, digital content and merch, with photography of real chefs, teams and customers.',
+      'Recognized by the El Salvador Chamber of Tourism as an initiative that boosted and strengthened the country’s food industry.'],
+      stats: [['+24.48%', 'in food-industry billing'], ['+55', 'new businesses'], ['+108%', 'in commissions from new merchants']] },
+    'mccormick': { name: 'McCormick Mayonnaise', line: 'The dish takes center stage.', tags: 'Packaging · Proposal', intro: [
+      'A packaging redesign proposal for McCormick mayonnaise. We started from what people already recognize: the brand mark and the red-and-blue band at the top of the pack.',
+      'The dish is the hero: free within the composition, unframed, with strong light, shadow and texture. The product name becomes a logotype of its own, so that when someone thinks of mayonnaise, they think of McCormick.'] },
+    'yo-me-uno': { line: 'Voices that echo.', tags: 'Campaign · Micro-documentaries · OOH', intro: [
+      'El Salvador’s nature speaks through seven foundations that work every day to protect it. For Yo Me Uno, BAC’s cause platform, we gave them that voice.',
+      'We produced a micro-documentary about each organization and had them compete on yomeuno.com: the most-viewed video won $5,000 and the foundation with the most donations won $10,000.'],
+      stats: [['x28', 'growth in donations'], ['+1.3M', 'organic video views']] },
+    'economia': { tags: 'Launch · TV spot · OOH · Digital', intro: [
+      'Launch of EconoMía, El Salvador’s first Life Centric card, designed around the personality of its new customers.',
+      'The campaign speaks about two moments: what you enjoy today and what you achieve later. Today you pay for the gym, later you have one at home. We built it with bold, saturated photography and typography that puts both moments in dialogue.'] },
+    'apac': { tags: 'Visual identity · Digital content', intro: [
+      'APAC is a culinary academy in El Salvador. Under the concept Where talent levels up, we directed its digital content and refreshed its visual identity.',
+      'We moved the brand from the finished plate to the process: the camera gets close to the hands and gestures of cooks at their stations, under cool kitchen light. On that base we built a system of vector patterns drawn from real kitchen textures.'] },
+    'club-de-directores': { name: 'Directors Club', tags: 'Naming · Identity · Event', intro: [
+      'A BAC forum for company directors: strategic information, economic outlooks and perspectives that can turn into real decisions.',
+      'We created the name, the identity and the event’s key visual, and carried it across invitations, agenda, badges, wristbands and backdrop. BAC red on black, with a grid that moves forward like the concept itself.'] },
+    'heartworkers': { tags: 'Recruitment campaign · Digital · OOH', intro: [
+      'A recruitment campaign for Teleperformance in El Salvador and Guatemala. It puts a new generation of young talent front and center, people looking for a place where work feels right.',
+      'We built the visual world with vivid color portraits, first-person testimonials and motion pieces for digital.'] },
+    'favorito-del-partido': { tags: 'Limited edition · OOH · Point of sale', intro: [
+      'A limited edition of Lactolac dips for the World Cup season: chimichurri, Spanish chorizo and German sausage.',
+      'We designed a system of collectible cards, one per flavor, with the energy of a football sticker album. From there came the billboards, street posters, point-of-sale material and digital pieces.'] },
+    'md': { tags: 'Seasonal campaign · Spot · Street posters', intro: [
+      'A year-end campaign for MD. The street becomes a runway: every step is a look and every look tells a story.',
+      'Ground-level photography on streets with character, adapted for street posters, video and digital.'] },
+    'asi-sabe-el-verano': { tags: 'Seasonal campaign · Billboards · Street posters', intro: [
+      'A summer campaign for Lactolac: cheese and dips as part of the season’s plans, from the pool to the picnic.',
+      'A bright palette, sun graphics and in-scene product photography for billboards, street posters and digital.'] },
+    'el-amor-se-cocina': { tags: '360 campaign · OOH · Digital · Screens', intro: [
+      'A Christmas campaign for Lactolac. In December the family recipes come back to the table, and every dish is made with someone in mind.',
+      'We built the concept El amor se cocina (Love is cooked) with warm kitchen photography, an orange palette and hand-drawn holiday graphics. A 360 campaign across billboards, screens, video and digital.'] },
+    'works-for-me': { tags: '3D animation · Social', intro: [
+      'A talent attraction campaign for Teleperformance with a direct message: a job that fits your life. Flexible schedules, steady pay and real growth.',
+      'We animated it in 3D for large-format screens and took it to social media with a vibrant color system.'] },
+    'cup-clash': { tags: 'Internal brand · Activation', intro: [
+      'An internal World Cup prediction game for Teleperformance employees: play during breaks, guess the scores and win prizes.',
+      'We created the brand and a graphic system inspired by stadiums and jerseys for screens, presentations and the in-office activation.'] }
+  };
+  const META_EN = { 'Cliente': 'Client', 'Rol': 'Role', 'Agencia': 'Agency', 'Reconocimiento': 'Recognition', 'Estado': 'Status',
+    'Dirección de arte': 'Art direction', 'Dirección de arte y coordinación de producción': 'Art direction and production coordination',
+    'Propuesta no publicada': 'Unpublished proposal', 'Cámara de Turismo de El Salvador': 'El Salvador Chamber of Tourism' };
+  const qlang = new URLSearchParams(location.search).get('lang');
+  let LANG = (qlang === 'en' || qlang === 'es') ? qlang : (() => { try { return localStorage.getItem('lang'); } catch (e) { return null; } })() || ((navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en');
+  const T = (es, en) => LANG === 'en' ? en : es;
+  const tc = c => { if (LANG !== 'en' || !EN[c.id]) return c; const o = Object.assign({}, c, EN[c.id]); o.meta = c.meta.map(([k, v]) => [META_EN[k] || k, META_EN[v] || v]); return o; };
+
   /* ---------------- UTILIDADES ---------------- */
   const h = (tag, attrs = {}, ...kids) => {
     const el = document.createElement(tag);
@@ -308,10 +361,10 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
   requestAnimationFrame(tick);
 
   function soundBtn(v) {
-    const b = h('button', { class: 'sound', type: 'button', 'aria-pressed': 'false' }, 'Sonido');
+    const b = h('button', { class: 'sound', type: 'button', 'aria-pressed': 'false' }, T('Sonido', 'Sound'));
     b.addEventListener('click', () => {
       document.querySelectorAll('video').forEach(o => { if (o !== v) o.muted = true; });
-      v.muted = !v.muted; b.setAttribute('aria-pressed', String(!v.muted)); b.textContent = v.muted ? 'Sonido' : 'Silenciar';
+      v.muted = !v.muted; b.setAttribute('aria-pressed', String(!v.muted)); b.textContent = v.muted ? T('Sonido', 'Sound') : T('Silenciar', 'Mute');
       if (!v.muted) { v.currentTime = 0; v.play().catch(() => {}); }
     });
     return b;
@@ -701,11 +754,12 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
           h('span', { class: 'mega-photo', style: { '--d': '260ms' } }, h('img', { src: 'i/javier-bn.webp', alt: 'Javier Sandoval', decoding: 'async' })),
           h('span', { class: 'mega-word', style: { '--d': '140ms' } }, words[1]))),
       h('div', { class: 'home-sub' },
-        h('p', {}, 'Senior Creative Visual.'),
-        h('p', { class: 'muted' }, 'Campañas, plataformas e identidades para marcas locales y regionales.'),
-        h('a', { class: 'scroll-cue', href: '#trabajo' }, 'Ver proyectos')));
+        h('p', {}, T('Senior Creative Visual.', 'Senior Visual Creative.')),
+        h('p', { class: 'muted' }, T('Campañas, plataformas e identidades para marcas locales y regionales.', 'Campaigns, platforms and identities for local and regional brands.')),
+        h('a', { class: 'scroll-cue', href: '#trabajo' }, T('Ver proyectos', 'View work'))));
 
-    const rows = CASES.map((c, i) => {
+    const rows = CASES.map((c0, i) => {
+      const c = tc(c0);
       const media = coverMedia(c, false);
       const desc = c.intro[0].split('. ')[0].replace(/\.$/, '') + '.';
       const open = h('div', { class: 'row-open' }, h('div', { class: 'row-open-in' },
@@ -714,7 +768,7 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
           h('p', { class: 'row-line' }, c.line),
           h('p', { class: 'row-desc' }, desc),
           h('p', { class: 'row-tags muted' }, c.tags),
-          h('span', { class: 'row-go' }, 'Ver proyecto'))));
+          h('span', { class: 'row-go' }, T('Ver proyecto', 'View project')))));
       const row = h('a', { class: 'row', href: '#' + c.id },
         h('div', { class: 'row-head' },
           h('span', { class: 'row-meta' }, h('span', { class: 'num' }, pad(i + 1)), h('span', {}, c.brand)),
@@ -733,19 +787,19 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
       rows.forEach(r => mid.observe(r));
     }
     const work = h('section', { class: 'work wrap', id: 'trabajo' },
-      h('div', { class: 'work-head' }, h('span', { class: 'label' }, 'Proyectos'), h('span', { class: 'label num' }, pad(CASES.length))),
+      h('div', { class: 'work-head' }, h('span', { class: 'label' }, T('Proyectos', 'Work')), h('span', { class: 'label num' }, pad(CASES.length))),
       list);
     rows.forEach(r => track(r, p => { const e = ease(clamp(p * 3.2 - 0.1)); r.style.setProperty('--rise', ((1 - e) * 100).toFixed(1) + '%'); }));
 
     const about = h('section', { class: 'about wrap', id: 'perfil' },
-      h('h2', { class: 'label' }, 'Perfil'),
+      h('h2', { class: 'label' }, T('Perfil', 'Profile')),
       h('div', { class: 'about-grid' },
-        h('p', { class: 'about-lead' }, 'Senior Creative Visual. Lidero un equipo de diseño y dirijo el arte de campañas, plataformas, identidades gráficas y lanzamientos de producto para marcas locales y regionales.'),
+        h('p', { class: 'about-lead' }, T('Senior Creative Visual. Lidero un equipo de diseño y dirijo el arte de campañas, plataformas, identidades gráficas y lanzamientos de producto para marcas locales y regionales.', 'Senior Visual Creative. I lead a design team and art direct campaigns, brand platforms, visual identities and product launches for local and regional brands.')),
         h('dl', { class: 'cv' },
-          cvRow('Experiencia', [['Senior Creative Visual', 'Ogilvy El Salvador', '2023 — hoy'], ['Asistente Creativo', 'Ogilvy El Salvador', '2021 — 2023'], ['Diseñador Digital', 'Riot El Salvador', '2021']]),
-          cvRow('Educación', [['Diseño Industrial y de Productos', 'Universidad Don Bosco', '2017 — 2022']]),
-          h('div', { class: 'cv-row' }, h('dt', {}, 'Marcas'), h('dd', {}, h('p', { class: 'brands' }, 'BAC, Teleperformance, BMW, Lactolac, Popeyes, Pedidos Ya, YES, Diana, SISA, Chevrolet, Pilsener, Golden, MD, Urbánica, KIA, McCormick, APAC.'))),
-          h('div', { class: 'cv-row' }, h('dt', {}, 'Herramientas'), h('dd', {}, h('p', { class: 'brands' }, 'Illustrator, Photoshop, After Effects, Midjourney, Whisk y fotografía. Uso herramientas de IA para generación visual dentro del proceso creativo.')))
+          cvRow(T('Experiencia', 'Experience'), [[T('Senior Creative Visual', 'Senior Visual Creative'), 'Ogilvy El Salvador', T('2023 — hoy', '2023 — present')], [T('Asistente Creativo', 'Creative Assistant'), 'Ogilvy El Salvador', '2021 — 2023'], [T('Diseñador Digital', 'Digital Designer'), 'Riot El Salvador', '2021']]),
+          cvRow(T('Educación', 'Education'), [[T('Diseño Industrial y de Productos', 'Industrial and Product Design'), 'Universidad Don Bosco', '2017 — 2022']]),
+          h('div', { class: 'cv-row' }, h('dt', {}, T('Marcas', 'Brands')), h('dd', {}, h('p', { class: 'brands' }, 'BAC, Teleperformance, BMW, Lactolac, Popeyes, Pedidos Ya, YES, Diana, SISA, Chevrolet, Pilsener, Golden, MD, Urbánica, KIA, McCormick, APAC.'))),
+          h('div', { class: 'cv-row' }, h('dt', {}, T('Herramientas', 'Tools')), h('dd', {}, h('p', { class: 'brands' }, T('Illustrator, Photoshop, After Effects, Midjourney, Whisk y fotografía. Uso herramientas de IA para generación visual dentro del proceso creativo.', 'Illustrator, Photoshop, After Effects, Midjourney, Whisk and photography. I use AI tools for visual generation as part of the creative process.'))))
         )));
     app.replaceChildren(hero, work, about);
   }
@@ -753,8 +807,8 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
     return h('div', { class: 'cv-row' }, h('dt', {}, label), h('dd', {}, rows.map(([a, b, c]) => h('div', { class: 'cv-item' }, h('span', {}, a), h('span', { class: 'muted' }, b), h('span', { class: 'muted num' }, c)))));
   }
 
-  function viewCase(c) {
-    const idx = CASES.indexOf(c), next = CASES[(idx + 1) % CASES.length];
+  function viewCase(c0) {
+    const idx = CASES.indexOf(c0), c = tc(c0), next = tc(CASES[(idx + 1) % CASES.length]);
     const head = h('section', { class: 'case-head wrap' },
       h('p', { class: 'eyebrow' }, c.brand === c.name ? c.name : `${c.brand} — ${c.name}`),
       h('h1', { class: 'display' }, c.line));
@@ -767,7 +821,7 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
     const nmedia = coverMedia(next);
     const nframe = h('span', { class: 'next-media' }, nmedia);
     const nx = h('a', { class: 'next wrap', href: '#' + next.id },
-      h('span', { class: 'label' }, 'Siguiente proyecto'),
+      h('span', { class: 'label' }, T('Siguiente proyecto', 'Next project')),
       h('span', { class: 'next-name' }, next.name, h('span', { class: 'next-line' }, ' ', next.line)),
       h('span', { class: 'next-right' }, nframe, h('span', { class: 'next-arrow', 'aria-hidden': 'true' })));
     reveal(nframe, nmedia, { inset: 5 });
@@ -800,12 +854,23 @@ window.SCENES = {"ht-valla": {"frames": ["ht-valla-1.webp"], "rect": [25.31, 34.
     observe();
     app.classList.remove('enter'); void app.offsetWidth; app.classList.add('enter');
   }
+  function applyStatic() {
+    document.documentElement.lang = LANG;
+    document.querySelectorAll('[data-en]').forEach(el => { if (!el.dataset.es) el.dataset.es = el.textContent; el.textContent = LANG === 'en' ? el.dataset.en : el.dataset.es; });
+    document.querySelectorAll('.lang-opt').forEach(b => b.classList.toggle('on', b.dataset.l === LANG));
+  }
+  document.querySelectorAll('.lang-opt').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.l === LANG) return;
+    LANG = b.dataset.l; try { localStorage.setItem('lang', LANG); } catch (e) {}
+    const y = scrollY; applyStatic(); route(); if (location.hash.replace('#', '') === '' ) scrollTo(0, 0);
+  }));
+  applyStatic();
   window.addEventListener('hashchange', route);
   route();
 
   document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => {
     const t = b.dataset.copy;
     const sel = () => { const r = document.createRange(); r.selectNodeContents(b.previousElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
-    try { navigator.clipboard.writeText(t).then(() => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = 'Copiar', 1600); }, sel); } catch (e) { sel(); }
+    try { navigator.clipboard.writeText(t).then(() => { b.textContent = T('Copiado', 'Copied'); setTimeout(() => b.textContent = T('Copiar', 'Copy'), 1600); }, sel); } catch (e) { sel(); }
   }));
 })();
